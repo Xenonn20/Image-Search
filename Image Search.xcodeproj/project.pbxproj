@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		740D7C5D232FE964000529DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C5C232FE964000529DD /* AppDelegate.swift */; };
-		740D7C5F232FE964000529DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C5E232FE964000529DD /* ViewController.swift */; };
 		740D7C62232FE964000529DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740D7C60232FE964000529DD /* Main.storyboard */; };
 		740D7C64232FE966000529DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740D7C63232FE966000529DD /* Assets.xcassets */; };
 		740D7C67232FE966000529DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740D7C65232FE966000529DD /* LaunchScreen.storyboard */; };
+		740D7C6F232FEA4E000529DD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C6E232FEA4E000529DD /* MainTabBarController.swift */; };
+		740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */; };
+		740D7C73232FECA7000529DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C72232FECA7000529DD /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		740D7C59232FE964000529DD /* Image Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Image Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		740D7C5C232FE964000529DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		740D7C5E232FE964000529DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		740D7C61232FE964000529DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		740D7C63232FE966000529DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740D7C66232FE966000529DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740D7C68232FE966000529DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		740D7C6E232FEA4E000529DD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewController.swift; sourceTree = "<group>"; };
+		740D7C72232FECA7000529DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				740D7C5C232FE964000529DD /* AppDelegate.swift */,
-				740D7C5E232FE964000529DD /* ViewController.swift */,
+				740D7C6E232FEA4E000529DD /* MainTabBarController.swift */,
+				740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */,
+				740D7C72232FECA7000529DD /* ViewController.swift */,
 				740D7C60232FE964000529DD /* Main.storyboard */,
 				740D7C63232FE966000529DD /* Assets.xcassets */,
 				740D7C65232FE966000529DD /* LaunchScreen.storyboard */,
@@ -135,8 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				740D7C5F232FE964000529DD /* ViewController.swift in Sources */,
 				740D7C5D232FE964000529DD /* AppDelegate.swift in Sources */,
+				740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */,
+				740D7C73232FECA7000529DD /* ViewController.swift in Sources */,
+				740D7C6F232FEA4E000529DD /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
