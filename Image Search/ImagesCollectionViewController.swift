@@ -27,6 +27,7 @@ class ImagesCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.5745739937, blue: 0.001978197834, alpha: 1)
         setupCollectionView()
         setupNavigationBar()
+        setupSearchBar()
     }
     
     // MARK: - NavigationItems action
@@ -54,6 +55,17 @@ class ImagesCollectionViewController: UICollectionViewController {
         navigationItem.rightBarButtonItems = [actionBarButtonItem, addBarButtonItem]
     }
     
+    private func setupSearchBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        
+    }
+    
     // MARK: - UICollectionView Methods
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,4 +78,12 @@ class ImagesCollectionViewController: UICollectionViewController {
         return cell
     }
     
+}
+
+// MARK: - UISearchBarDelegate
+
+extension ImagesCollectionViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
 }
