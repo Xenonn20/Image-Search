@@ -14,6 +14,7 @@
 		740D7C6F232FEA4E000529DD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C6E232FEA4E000529DD /* MainTabBarController.swift */; };
 		740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */; };
 		740D7C73232FECA7000529DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C72232FECA7000529DD /* ViewController.swift */; };
+		7468DB682331597F00BC1413 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB672331597F00BC1413 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		740D7C6E232FEA4E000529DD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		740D7C72232FECA7000529DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7468DB672331597F00BC1413 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +60,49 @@
 		740D7C5B232FE964000529DD /* Image Search */ = {
 			isa = PBXGroup;
 			children = (
-				740D7C5C232FE964000529DD /* AppDelegate.swift */,
+				7468DB6A2331619E00BC1413 /* ViewControllers */,
+				7468DB692331616900BC1413 /* Service */,
+				7468DB6B233161B500BC1413 /* SupportingFiles */,
+				7468DB6C233161DB00BC1413 /* Storyboards */,
+				740D7C63232FE966000529DD /* Assets.xcassets */,
+			);
+			path = "Image Search";
+			sourceTree = "<group>";
+		};
+		7468DB692331616900BC1413 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7468DB672331597F00BC1413 /* NetworkService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		7468DB6A2331619E00BC1413 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
 				740D7C6E232FEA4E000529DD /* MainTabBarController.swift */,
 				740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */,
 				740D7C72232FECA7000529DD /* ViewController.swift */,
-				740D7C60232FE964000529DD /* Main.storyboard */,
-				740D7C63232FE966000529DD /* Assets.xcassets */,
-				740D7C65232FE966000529DD /* LaunchScreen.storyboard */,
-				740D7C68232FE966000529DD /* Info.plist */,
 			);
-			path = "Image Search";
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7468DB6B233161B500BC1413 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				740D7C68232FE966000529DD /* Info.plist */,
+				740D7C5C232FE964000529DD /* AppDelegate.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		7468DB6C233161DB00BC1413 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				740D7C60232FE964000529DD /* Main.storyboard */,
+				740D7C65232FE966000529DD /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7468DB682331597F00BC1413 /* NetworkService.swift in Sources */,
 				740D7C5D232FE964000529DD /* AppDelegate.swift in Sources */,
 				740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */,
 				740D7C73232FECA7000529DD /* ViewController.swift in Sources */,
@@ -292,7 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 82777S943Z;
-				INFOPLIST_FILE = "Image Search/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Image Search/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 82777S943Z;
-				INFOPLIST_FILE = "Image Search/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Image Search/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
