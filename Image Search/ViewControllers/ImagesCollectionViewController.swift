@@ -10,7 +10,8 @@ import UIKit
 
 class ImagesCollectionViewController: UICollectionViewController {
     
-    var networkService = NetworkService()
+    let networkDataFetcher = NetworkDataFetcher()
+    private var timer: Timer?
     
     //MARK: - Properties
     
@@ -86,8 +87,16 @@ class ImagesCollectionViewController: UICollectionViewController {
 
 extension ImagesCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        networkService.request(searchTerm: searchText) { (_, _) in
-            print("123")
-        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+            self.networkDataFetcher.fetchImages(searchTerm: searchText) { (searchResults) in
+                searchResults?.results.map({ (image) in
+                    print(image.urls["thumb"])
+                })
+            }
+        })
+        
+        
     }
 }
+

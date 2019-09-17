@@ -15,6 +15,8 @@
 		740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */; };
 		740D7C73232FECA7000529DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D7C72232FECA7000529DD /* ViewController.swift */; };
 		7468DB682331597F00BC1413 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB672331597F00BC1413 /* NetworkService.swift */; };
+		7468DB6E233180E600BC1413 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB6D233180E600BC1413 /* NetworkDataFetcher.swift */; };
+		7468DB70233181A400BC1413 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB6F233181A400BC1413 /* SearchResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		740D7C72232FECA7000529DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7468DB672331597F00BC1413 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7468DB6D233180E600BC1413 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		7468DB6F233181A400BC1413 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 		740D7C5B232FE964000529DD /* Image Search */ = {
 			isa = PBXGroup;
 			children = (
+				7468DB71233181BD00BC1413 /* Models */,
 				7468DB6A2331619E00BC1413 /* ViewControllers */,
 				7468DB692331616900BC1413 /* Service */,
 				7468DB6B233161B500BC1413 /* SupportingFiles */,
@@ -73,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				7468DB672331597F00BC1413 /* NetworkService.swift */,
+				7468DB6D233180E600BC1413 /* NetworkDataFetcher.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -103,6 +109,14 @@
 				740D7C65232FE966000529DD /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7468DB71233181BD00BC1413 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7468DB6F233181A400BC1413 /* SearchResults.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,8 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7468DB682331597F00BC1413 /* NetworkService.swift in Sources */,
+				7468DB6E233180E600BC1413 /* NetworkDataFetcher.swift in Sources */,
 				740D7C5D232FE964000529DD /* AppDelegate.swift in Sources */,
 				740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */,
+				7468DB70233181A400BC1413 /* SearchResults.swift in Sources */,
 				740D7C73232FECA7000529DD /* ViewController.swift in Sources */,
 				740D7C6F232FEA4E000529DD /* MainTabBarController.swift in Sources */,
 			);
