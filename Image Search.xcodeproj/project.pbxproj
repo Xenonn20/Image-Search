@@ -17,6 +17,7 @@
 		7468DB682331597F00BC1413 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB672331597F00BC1413 /* NetworkService.swift */; };
 		7468DB6E233180E600BC1413 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB6D233180E600BC1413 /* NetworkDataFetcher.swift */; };
 		7468DB70233181A400BC1413 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468DB6F233181A400BC1413 /* SearchResults.swift */; };
+		746D43892332D42100B36DB6 /* ImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746D43882332D42100B36DB6 /* ImagesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		7468DB672331597F00BC1413 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7468DB6D233180E600BC1413 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		7468DB6F233181A400BC1413 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		746D43882332D42100B36DB6 /* ImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				740D7C6E232FEA4E000529DD /* MainTabBarController.swift */,
 				740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */,
+				746D43882332D42100B36DB6 /* ImagesCell.swift */,
 				740D7C72232FECA7000529DD /* ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -191,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7468DB682331597F00BC1413 /* NetworkService.swift in Sources */,
+				746D43892332D42100B36DB6 /* ImagesCell.swift in Sources */,
 				7468DB6E233180E600BC1413 /* NetworkDataFetcher.swift in Sources */,
 				740D7C5D232FE964000529DD /* AppDelegate.swift in Sources */,
 				740D7C71232FEBAF000529DD /* ImagesCollectionViewController.swift in Sources */,
