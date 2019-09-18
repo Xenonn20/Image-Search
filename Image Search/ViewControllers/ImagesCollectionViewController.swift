@@ -12,7 +12,7 @@ class ImagesCollectionViewController: UICollectionViewController {
     
     let networkDataFetcher = NetworkDataFetcher()
     private var timer: Timer?
-    
+    private var images = [UnsplashImage]()
     //MARK: - Properties
     
     private lazy var addBarButtonItem: UIBarButtonItem = {
@@ -47,6 +47,7 @@ class ImagesCollectionViewController: UICollectionViewController {
     
     private func setupCollectionView() {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(ImagesCell.self, forCellWithReuseIdentifier: ImagesCell.reuseID)
     }
     
     private func setupNavigationBar() {
@@ -72,12 +73,13 @@ class ImagesCollectionViewController: UICollectionViewController {
     // MARK: - UICollectionView Methods
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesCell.reuseID, for: indexPath) as! ImagesCell
+       let unsplashImage = images[indexPath.item]
+        cell.unsplashImage = unsplashImage
         return cell
     }
     
@@ -89,14 +91,12 @@ extension ImagesCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-            self.networkDataFetcher.fetchImages(searchTerm: searchText) { (searchResults) in
-                searchResults?.results.map({ (image) in
-                    print(image.urls["thumb"])
-                })
+            self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self](searchResults) in
+                guard let fetchedImages = searchResults else { return }
+                self?.images = fetchedImages.results
+                self?.collectionView.reloadData()
             }
         })
-        
-        
     }
 }
 

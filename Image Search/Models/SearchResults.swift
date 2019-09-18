@@ -10,10 +10,10 @@ import Foundation
 
 struct SearchResults: Decodable {
     let total: Int
-    let results: [UnsplashPhoto]
+    let results: [UnsplashImage]
 }
 
-struct UnsplashPhoto: Decodable {
+struct UnsplashImage: Decodable {
     let width: Int
     let height: Int
     let urls: [URLKing.RawValue: String]
