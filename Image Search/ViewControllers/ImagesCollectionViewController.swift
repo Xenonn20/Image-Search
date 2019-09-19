@@ -10,27 +10,49 @@ import UIKit
 
 class ImagesCollectionViewController: UICollectionViewController {
     
+    //MARK: - Stored properties
+    
     let networkDataFetcher = NetworkDataFetcher()
     private var timer: Timer?
     private var images = [UnsplashImage]()
-    //MARK: - Properties
+    private let itemsPerRow: CGFloat = 2
+    private let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    private var selectedImages = [UIImage]()
+    
+    //MARK: - Computed properties
     
     private lazy var addBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped))
     }()
+    
     private lazy var actionBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(actionBarButtonTapped))
     }()
+    
+    private var numberOfSelectedPhotos: Int {
+        return collectionView.indexPathsForSelectedItems?.count ?? 0
+    }
     
     // MARK: Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.5745739937, blue: 0.001978197834, alpha: 1)
+        collectionView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
         setupCollectionView()
         setupNavigationBar()
         setupSearchBar()
+        updateNaviButtonState()
+    }
+    private func updateNaviButtonState() {
+        addBarButtonItem.isEnabled = numberOfSelectedPhotos > 0
+        actionBarButtonItem.isEnabled = numberOfSelectedPhotos > 0
+    }
+    
+    private func refresh() {
+        self.selectedImages.removeAll()
+        self.collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
+        updateNaviButtonState()
     }
     
     // MARK: - NavigationItems action
@@ -39,8 +61,18 @@ class ImagesCollectionViewController: UICollectionViewController {
         
     }
     
-    @objc private func actionBarButtonTapped() {
+    @objc private func actionBarButtonTapped(sender: UIBarButtonItem) {
         
+        let shareControllet = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
+        shareControllet.completionWithItemsHandler = { _, bool, _, _ in
+            if bool {
+                self.refresh()
+            }
+        }
+        shareControllet.popoverPresentationController?.barButtonItem = sender
+        shareControllet.popoverPresentationController?.permittedArrowDirections = .any
+        
+        present(shareControllet, animated: true, completion: nil)
     }
     
     // MARK: - Setup UI Elements
@@ -48,6 +80,10 @@ class ImagesCollectionViewController: UICollectionViewController {
     private func setupCollectionView() {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.register(ImagesCell.self, forCellWithReuseIdentifier: ImagesCell.reuseID)
+        
+        collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        collectionView.contentInsetAdjustmentBehavior = .automatic
+        collectionView.allowsMultipleSelection = true
     }
     
     private func setupNavigationBar() {
@@ -78,9 +114,24 @@ class ImagesCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesCell.reuseID, for: indexPath) as! ImagesCell
-       let unsplashImage = images[indexPath.item]
+        let unsplashImage = images[indexPath.item]
         cell.unsplashImage = unsplashImage
         return cell
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        updateNaviButtonState()
+        let cell = collectionView.cellForItem(at: indexPath) as! ImagesCell
+        guard let image = cell.photoImageView.image else { return }
+        selectedImages.append(image)
+        
+    }
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateNaviButtonState()
+        let cell = collectionView.cellForItem(at: indexPath) as! ImagesCell
+        guard let image = cell.photoImageView.image else { return }
+        if let index = selectedImages.firstIndex(of: image) {
+            selectedImages.remove(at: index)
+        }
     }
     
 }
@@ -89,14 +140,35 @@ class ImagesCollectionViewController: UICollectionViewController {
 
 extension ImagesCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self](searchResults) in
                 guard let fetchedImages = searchResults else { return }
                 self?.images = fetchedImages.results
                 self?.collectionView.reloadData()
+                self?.refresh()
             }
         })
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension ImagesCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let image = images[indexPath.item]
+        let paddingSpace = sectionInserts.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let height = CGFloat(image.height) * widthPerItem / CGFloat(image.width)
+        return CGSize(width: widthPerItem, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInserts
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInserts.left
+    }
+}
