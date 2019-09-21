@@ -99,14 +99,13 @@ class ImagesCollectionViewController: UICollectionViewController {
         let searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
         
         
     }
     
-    // MARK: - UICollectionView Methods
+    // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -147,6 +146,7 @@ extension ImagesCollectionViewController: UISearchBarDelegate {
                 self?.images = fetchedImages.results
                 self?.collectionView.reloadData()
                 self?.refresh()
+                print(#function)
             }
         })
     }

@@ -14,9 +14,10 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         let imagesVC = ImagesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let likesVC = LikesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         
         viewControllers = [generateNavigationController(rootViewController: imagesVC, title: "Images", image: #imageLiteral(resourceName: "photos-simple-7")),
-                           generateNavigationController(rootViewController: ViewController(), title: "Favourites", image: #imageLiteral(resourceName: "heart-7"))]
+                           generateNavigationController(rootViewController: likesVC, title: "Favourites", image: #imageLiteral(resourceName: "heart-7"))]
     }
     
     private func generateNavigationController(rootViewController: UIViewController,
