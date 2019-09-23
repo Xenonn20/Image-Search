@@ -40,7 +40,7 @@ class LikesCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = .white
         collectionView.register(LikesCollectionViewCell.self, forCellWithReuseIdentifier: LikesCollectionViewCell.reuseID)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        collectionView.allowsMultipleSelection = true
+//        collectionView.allowsMultipleSelection = true
         
         setupNavigationBar()
         setupEnterLabel()
@@ -71,7 +71,7 @@ class LikesCollectionViewController: UICollectionViewController {
     }
     @objc func deleteImage() {
         guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
-        self.images.removeAll()
+        self.images.remove(at: indexPath[0].item)
         collectionView.deleteItems(at: indexPath)
         collectionView.reloadData()
     }
