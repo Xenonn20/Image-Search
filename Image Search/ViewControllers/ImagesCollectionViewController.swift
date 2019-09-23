@@ -33,6 +33,11 @@ class ImagesCollectionViewController: UICollectionViewController {
         return collectionView.indexPathsForSelectedItems?.count ?? 0
     }
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let spiner = UIActivityIndicatorView(style: .gray)
+        spiner.translatesAutoresizingMaskIntoConstraints = false
+        return spiner
+    }()
     // MARK: Functions
     
     override func viewDidLoad() {
@@ -43,6 +48,7 @@ class ImagesCollectionViewController: UICollectionViewController {
         setupNavigationBar()
         setupSearchBar()
         updateNaviButtonState()
+        setupActivityIndicator()
     }
     private func updateNaviButtonState() {
         addBarButtonItem.isEnabled = numberOfSelectedPhotos > 0
@@ -58,7 +64,34 @@ class ImagesCollectionViewController: UICollectionViewController {
     // MARK: - NavigationItems action
     
     @objc private func addBarButtonTapped() {
+        let selectedImage = collectionView.indexPathsForSelectedItems?.reduce([], { (photoss, IndexPath) -> [UnsplashImage] in
+            var mutableImage = photoss
+            let image = images[IndexPath.item]
+            mutableImage.append(image)
+            return mutableImage
+        })
+        let alertController = UIAlertController(title: "", message: "\(selectedImage!.count) images will be added to the album", preferredStyle: .alert)
         
+        let add = UIAlertAction(title: "Add", style: .default) { (action) in
+            let tabbar = self.tabBarController as! MainTabBarController
+            let navVC = tabbar.viewControllers?[1] as! UINavigationController
+            let likeVC = navVC.topViewController as! LikesCollectionViewController
+            
+            likeVC.images.append(contentsOf: selectedImage ?? [])
+            likeVC.collectionView.reloadData()
+            
+            self.refresh()
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive) { (_) in
+            self.refresh()
+        }
+        
+        alertController.addAction(add)
+        alertController.addAction(cancel)
+        
+        
+        present(alertController, animated: true)
     }
     
     @objc private func actionBarButtonTapped(sender: UIBarButtonItem) {
@@ -101,8 +134,13 @@ class ImagesCollectionViewController: UICollectionViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
+    }
+    
+    private func setupActivityIndicator() {
+        collectionView.addSubview(activityIndicator)
         
-        
+        activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
     }
     
     // MARK: - UICollectionViewDataSource
@@ -139,14 +177,15 @@ class ImagesCollectionViewController: UICollectionViewController {
 
 extension ImagesCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.activityIndicator.startAnimating()
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) { [weak self](searchResults) in
                 guard let fetchedImages = searchResults else { return }
+                self?.activityIndicator.stopAnimating()
                 self?.images = fetchedImages.results
                 self?.collectionView.reloadData()
                 self?.refresh()
-                print(#function)
             }
         })
     }

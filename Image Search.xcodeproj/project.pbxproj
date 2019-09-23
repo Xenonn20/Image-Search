@@ -107,9 +107,8 @@
 			children = (
 				740D7C6E232FEA4E000529DD /* MainTabBarController.swift */,
 				740D7C70232FEBAF000529DD /* ImagesCollectionViewController.swift */,
-				746D43882332D42100B36DB6 /* ImagesCell.swift */,
-				74A7122023358EA200D456D9 /* LikesCollectionViewCell.swift */,
 				740D7C72232FECA7000529DD /* LikesCollectionViewController.swift */,
+				74A712282335A43200D456D9 /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -138,6 +137,15 @@
 				7468DB6F233181A400BC1413 /* SearchResults.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		74A712282335A43200D456D9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				74A7122023358EA200D456D9 /* LikesCollectionViewCell.swift */,
+				746D43882332D42100B36DB6 /* ImagesCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B5F340A4B4FA44B3766C8DBA /* Pods */ = {

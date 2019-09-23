@@ -17,7 +17,7 @@ class LikesCollectionViewController: UICollectionViewController {
     //MARK: - Computed properties
     
     private lazy var trashBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: nil)
+        return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteImage))
     }()
     
     private var enterSearchTermLabel: UILabel = {
@@ -29,6 +29,9 @@ class LikesCollectionViewController: UICollectionViewController {
         return label
     }()
     
+    private var numberOfSelectedPhotos: Int {
+          return collectionView.indexPathsForSelectedItems?.count ?? 0
+      }
     // MARK: Functions
     
     override func viewDidLoad() {
@@ -37,12 +40,19 @@ class LikesCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = .white
         collectionView.register(LikesCollectionViewCell.self, forCellWithReuseIdentifier: LikesCollectionViewCell.reuseID)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionView.allowsMultipleSelection = true
         
         setupNavigationBar()
         setupEnterLabel()
         setupLayout()
+        updateNaviButtonState()
     }
-    // MARK: - Functions
+    
+    private func updateNaviButtonState() {
+           trashBarButtonItem.isEnabled = numberOfSelectedPhotos > 0
+           
+       }
+    // MARK: - Setup UI Elements
     
     private func setupEnterLabel() {
         collectionView.addSubview(enterSearchTermLabel)
@@ -59,7 +69,12 @@ class LikesCollectionViewController: UICollectionViewController {
         navigationItem.rightBarButtonItem = trashBarButtonItem
         trashBarButtonItem.isEnabled = false
     }
-    
+    @objc func deleteImage() {
+        guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
+        self.images.removeAll()
+        collectionView.deleteItems(at: indexPath)
+        collectionView.reloadData()
+    }
     
     // MARK: - UICollectionViewDataSource
     
@@ -70,8 +85,16 @@ class LikesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikesCollectionViewCell.reuseID, for: indexPath) as! LikesCollectionViewCell
         let unsplashImage = images[indexPath.item]
-//        cell.unsplashImage = unsplashImage
+        cell.unsplashImage = unsplashImage
     return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        updateNaviButtonState()
+    }
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateNaviButtonState()
     }
 }
 
